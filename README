@@ -1,0 +1,24 @@
+epflo extrapolates optical flow from smaller FLO or FLOW files to a
+higher resolution.
+
+Usage: epflo -w widht -h height [-x scale_x] [-y scale_y] in-file out-file
+  -w width      width of the output file
+  -h height     height of the output file
+  -x scale_x    extrapolation factor in x direction
+  -y scale_y    extrapolation factor in y direction
+
+  in-file       input file name (usually a .flo or .flow file)
+  out-file      output file name
+
+Example:
+   epflo -w 316 -h 252 -x 5.0 -y 5.0 input.flow output.flow
+
+epflo warns if it can't detect either a FLO or FLOW file. Note that FLOW
+files are similar to the Middleburry FLO format, but in addition, each
+vector has an additional confidence value
+
+FLO Format:
+	PIEHwhu0v0...unvn
+
+FLOW format:
+	PIEIwhu0v0c0...unvncn
