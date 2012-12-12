@@ -253,7 +253,6 @@ extrapolate(const int w, const int h, float sx, float sy, char *in, char *out)
 	float weight[2][2];
 	for (int y = 0; y < h; y++) {
 		for (int x = 0; x < w; x++) {
-
 			float rx = (float)x / sx;
 			float ry = (float)y / sy;
 
@@ -271,19 +270,20 @@ extrapolate(const int w, const int h, float sx, float sy, char *in, char *out)
 			int n = 0;
 			for (iy = ky1, wy = 0; iy < ky2; iy++, wy++) {
 				for (ix = kx1, wx = 0; ix < kx2; ix++, wx++, n++) {
+					if (ix >= in_flo->w || iy >= in_flo->h) continue;
 					u += weight[wx][wy] * _U(in_flo, ix, iy, npb);
 					v += weight[wx][wy] * _V(in_flo, ix, iy, npb);
 					if (out_flo->fmt == FF_FLOW)
 						c += weight[wx][wy] * _C(in_flo, ix, iy, npb);
 				}
 			}
-
 			_U(out_flo, x, y, npb) = u;
 			_V(out_flo, x, y, npb) = v;
 			if (out_flo->fmt == FF_FLOW)
 				_C(out_flo, x, y, npb) = c;
 		}
 	}
+
 	write_flow(out, out_flo);
 	free_flow(in_flo);
 	free_flow(out_flo);
