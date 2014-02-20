@@ -247,8 +247,8 @@ extrapolate(const int w, const int h, float sx, float sy, char *in, char *out)
 	memset(out_flo->data, 0, out_flo->nmemb * sizeof(float));
 
 	// determine exact scalings if none are passed
-	if (sx <= 0.0) sx = (float)w / (float)in_flo->w;
-	if (sy <= 0.0) sy = (float)h / (float)in_flo->h;
+	if (sx <= 0.0f) sx = (float)w / (float)in_flo->w;
+	if (sy <= 0.0f) sy = (float)h / (float)in_flo->h;
 
 	float weight[2][2];
 	for (int y = 0; y < h; y++) {
@@ -264,9 +264,9 @@ extrapolate(const int w, const int h, float sx, float sy, char *in, char *out)
 
 			interpolate2D_weights(rx, ry, weight);
 			int wx, wy, ix, iy;
-			float u = 0.0;
-			float v = 0.0;
-			float c = 0.0;
+			float u = 0.0f;
+			float v = 0.0f;
+			float c = 0.0f;
 			int n = 0;
 			for (iy = ky1, wy = 0; iy < ky2; iy++, wy++) {
 				for (ix = kx1, wx = 0; ix < kx2; ix++, wx++, n++) {
